@@ -61,13 +61,16 @@ class GitHubMasterApp {
             });
             
             if (!response.ok) {
-                throw new Error('Failed to initialize user');
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             
             const result = await response.json();
-            console.log('User initialized:', result);
+            console.log('✅ User initialized:', result);
+            return result;
         } catch (error) {
-            console.error('Error initializing user:', error);
+            console.error('❌ Error initializing user:', error);
+            // Don't throw error - app should still work without database
+            return null;
         }
     }
 
@@ -221,9 +224,25 @@ class GitHubMasterApp {
             if (response.ok) {
                 const result = await response.json();
                 this.userProgress = result.data;
+                console.log('✅ User progress loaded:', this.userProgress);
+            } else {
+                console.warn('⚠️ Could not load user progress, using defaults');
+                this.userProgress = {
+                    overall_progress: 0,
+                    quiz_scores: { basic: 0, commands: 0, workflow: 0 },
+                    total_study_time: 0,
+                    lessons_completed: 0
+                };
             }
         } catch (error) {
-            console.error('Error loading user progress:', error);
+            console.error('❌ Error loading user progress:', error);
+            // Use default progress if API fails
+            this.userProgress = {
+                overall_progress: 0,
+                quiz_scores: { basic: 0, commands: 0, workflow: 0 },
+                total_study_time: 0,
+                lessons_completed: 0
+            };
         }
     }
 

@@ -203,10 +203,325 @@ app.get('/', (c) => {
             </div>
           </section>
 
-          {/* Dynamic content sections will be loaded here */}
-          <div id="dynamic-content">
-            {/* Content loaded via JavaScript */}
-          </div>
+          {/* 学習セクション */}
+          <section id="learn-section" className="content-section">
+            <div className="section-header">
+              <h2 className="section-title">
+                <i className="fas fa-book"></i>
+                学習コンテンツ
+              </h2>
+              <p className="section-description">段階的にGitHubをマスターしよう！</p>
+            </div>
+
+            <div className="course-tabs">
+              <button className="tab-button active" data-course="beginner">
+                <i className="fas fa-seedling"></i> 初心者
+              </button>
+              <button className="tab-button" data-course="intermediate">
+                <i className="fas fa-tree"></i> 中級
+              </button>
+              <button className="tab-button" data-course="advanced">
+                <i className="fas fa-rocket"></i> 上級
+              </button>
+            </div>
+
+            <div className="course-content">
+              {/* 初心者コース */}
+              <div id="beginner-course" className="course-panel active">
+                <div className="lessons-grid">
+                  <div className="lesson-card" data-lesson="git-basics">
+                    <div className="lesson-icon">
+                      <i className="fab fa-git-alt"></i>
+                    </div>
+                    <h3>Gitとは？</h3>
+                    <p>バージョン管理システムの基本概念</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 10分</span>
+                      <span className="difficulty easy">初級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+
+                  <div className="lesson-card" data-lesson="github-intro">
+                    <div className="lesson-icon">
+                      <i className="fab fa-github"></i>
+                    </div>
+                    <h3>GitHubとは？</h3>
+                    <p>リモートリポジトリとソーシャルコーディング</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 15分</span>
+                      <span className="difficulty easy">初級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+
+                  <div className="lesson-card" data-lesson="repository-basics">
+                    <div className="lesson-icon">
+                      <i className="fas fa-folder-open"></i>
+                    </div>
+                    <h3>リポジトリの作成</h3>
+                    <p>プロジェクトの始め方と初期設定</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 20分</span>
+                      <span className="difficulty easy">初級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+
+                  <div className="lesson-card" data-lesson="commit-push">
+                    <div className="lesson-icon">
+                      <i className="fas fa-upload"></i>
+                    </div>
+                    <h3>コミットとプッシュ</h3>
+                    <p>変更の記録とアップロード</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 25分</span>
+                      <span className="difficulty easy">初級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 中級コース */}
+              <div id="intermediate-course" className="course-panel">
+                <div className="lessons-grid">
+                  <div className="lesson-card" data-lesson="branching-strategies">
+                    <div className="lesson-icon">
+                      <i className="fas fa-code-branch"></i>
+                    </div>
+                    <h3>ブランチ戦略</h3>
+                    <p>Git Flowと効果的なブランチ管理戦略</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 20分</span>
+                      <span className="difficulty medium">中級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+
+                  <div className="lesson-card" data-lesson="merge-conflicts">
+                    <div className="lesson-icon">
+                      <i className="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>マージコンフリクトの解決</h3>
+                    <p>コンフリクトが発生する理由と効果的な解決方法</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 25分</span>
+                      <span className="difficulty medium">中級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 上級コース */}
+              <div id="advanced-course" className="course-panel">
+                <div className="lessons-grid">
+                  <div className="lesson-card" data-lesson="github-actions">
+                    <div className="lesson-icon">
+                      <i className="fas fa-robot"></i>
+                    </div>
+                    <h3>GitHub Actions入門</h3>
+                    <p>CI/CDパイプラインの構築と自動化</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 30分</span>
+                      <span className="difficulty hard">上級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+
+                  <div className="lesson-card" data-lesson="advanced-git">
+                    <div className="lesson-icon">
+                      <i className="fas fa-magic"></i>
+                    </div>
+                    <h3>高度なGit操作</h3>
+                    <p>リベース、チェリーピック、サブモジュールなど</p>
+                    <div className="lesson-meta">
+                      <span className="duration"><i className="fas fa-clock"></i> 35分</span>
+                      <span className="difficulty hard">上級</span>
+                    </div>
+                    <button className="lesson-button">
+                      <i className="fas fa-play"></i> 開始
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 実践セクション */}
+          <section id="practice-section" className="content-section">
+            <div className="section-header">
+              <h2 className="section-title">
+                <i className="fas fa-code"></i>
+                実践練習
+              </h2>
+              <p className="section-description">実際の操作を通じて学習しよう！</p>
+            </div>
+            
+            <div className="practice-grid">
+              <div className="practice-card">
+                <div className="practice-icon">
+                  <i className="fas fa-terminal"></i>
+                </div>
+                <h3>コマンドライン練習</h3>
+                <p>Gitコマンドの基本操作を練習</p>
+                <button className="practice-button" onclick="startCommandPractice()">
+                  <i className="fas fa-play"></i> 開始
+                </button>
+              </div>
+
+              <div className="practice-card">
+                <div className="practice-icon">
+                  <i className="fas fa-code-branch"></i>
+                </div>
+                <h3>ブランチ操作</h3>
+                <p>ブランチの作成・切り替え・マージ</p>
+                <button className="practice-button" onclick="startBranchPractice()">
+                  <i className="fas fa-play"></i> 開始
+                </button>
+              </div>
+
+              <div className="practice-card">
+                <div className="practice-icon">
+                  <i className="fas fa-code-pull-request"></i>
+                </div>
+                <h3>プルリクエスト</h3>
+                <p>コラボレーションの基本</p>
+                <button className="practice-button" onclick="startPRPractice()">
+                  <i className="fas fa-play"></i> 開始
+                </button>
+              </div>
+            </div>
+
+            {/* 実践コンテンツエリア */}
+            <div id="practice-content" className="practice-content-area">
+              <!-- 動的にコンテンツが読み込まれます -->
+            </div>
+          </section>
+
+          {/* クイズセクション */}
+          <section id="quiz-section" className="content-section">
+            <div className="section-header">
+              <h2 className="section-title">
+                <i className="fas fa-brain"></i>
+                クイズチャレンジ
+              </h2>
+              <p className="section-description">知識をテストして理解度をチェック！</p>
+            </div>
+
+            <div className="quiz-options">
+              <div className="quiz-card" data-quiz="basic">
+                <div className="quiz-icon">
+                  <i className="fas fa-star"></i>
+                </div>
+                <h3>基本知識クイズ</h3>
+                <p>Git・GitHubの基本用語と概念</p>
+                <div className="quiz-meta">
+                  <span><i className="fas fa-question"></i> 10問</span>
+                  <span><i className="fas fa-clock"></i> 5分</span>
+                </div>
+                <button className="quiz-button" onclick="startQuiz('basic')">
+                  <i className="fas fa-play"></i> 開始
+                </button>
+              </div>
+
+              <div className="quiz-card" data-quiz="commands">
+                <div className="quiz-icon">
+                  <i className="fas fa-terminal"></i>
+                </div>
+                <h3>コマンドクイズ</h3>
+                <p>Gitコマンドの使い方をテスト</p>
+                <div className="quiz-meta">
+                  <span><i className="fas fa-question"></i> 15問</span>
+                  <span><i className="fas fa-clock"></i> 8分</span>
+                </div>
+                <button className="quiz-button" onclick="startQuiz('commands')">
+                  <i className="fas fa-play"></i> 開始
+                </button>
+              </div>
+
+              <div className="quiz-card" data-quiz="workflow">
+                <div className="quiz-icon">
+                  <i className="fas fa-project-diagram"></i>
+                </div>
+                <h3>ワークフロークイズ</h3>
+                <p>GitHubでの開発フローを理解</p>
+                <div className="quiz-meta">
+                  <span><i className="fas fa-question"></i> 12問</span>
+                  <span><i className="fas fa-clock"></i> 10分</span>
+                </div>
+                <button className="quiz-button" onclick="startQuiz('workflow')">
+                  <i className="fas fa-play"></i> 開始
+                </button>
+              </div>
+            </div>
+
+            {/* クイズコンテンツエリア */}
+            <div id="quiz-content" className="quiz-content-area">
+              <!-- 動的にクイズが読み込まれます -->
+            </div>
+          </section>
+
+          {/* マニュアルセクション */}
+          <section id="manual-section" className="content-section">
+            <div className="section-header">
+              <h2 className="section-title">
+                <i className="fas fa-book-open"></i>
+                完全マニュアル
+              </h2>
+              <p className="section-description">図解付きの詳細ガイド</p>
+            </div>
+
+            <div className="manual-sidebar">
+              <nav className="manual-nav">
+                <div className="manual-nav-item active" data-manual="getting-started">
+                  <i className="fas fa-rocket"></i>
+                  はじめに
+                </div>
+                <div className="manual-nav-item" data-manual="installation">
+                  <i className="fas fa-download"></i>
+                  インストール
+                </div>
+                <div className="manual-nav-item" data-manual="basic-concepts">
+                  <i className="fas fa-lightbulb"></i>
+                  基本概念
+                </div>
+                <div className="manual-nav-item" data-manual="commands">
+                  <i className="fas fa-terminal"></i>
+                  コマンド一覧
+                </div>
+                <div className="manual-nav-item" data-manual="workflows">
+                  <i className="fas fa-sitemap"></i>
+                  ワークフロー
+                </div>
+                <div className="manual-nav-item" data-manual="troubleshooting">
+                  <i className="fas fa-tools"></i>
+                  トラブルシューティング
+                </div>
+              </nav>
+            </div>
+
+            <div className="manual-content">
+              <div id="manual-content-area">
+                <!-- 動的にマニュアルコンテンツが読み込まれます -->
+              </div>
+            </div>
+          </section>
         </main>
 
         {/* Footer */}
@@ -239,12 +554,8 @@ app.get('/', (c) => {
         </footer>
 
         {/* JavaScript */}
-        <script src="/static/js/app.js"></script>
         <script src="/static/js/data-manager.js"></script>
-        <script src="/static/js/lessons.js"></script>
-        <script src="/static/js/quiz.js"></script>
-        <script src="/static/js/practice.js"></script>
-        <script src="/static/js/manual.js"></script>
+        <script src="/static/js/app.js"></script>
       </body>
     </div>
   )
