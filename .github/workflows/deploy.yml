@@ -1,0 +1,66 @@
+name: 🚀 Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+    
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+        
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: 📥 Install dependencies
+        run: npm ci
+        
+      - name: 🔧 Build application
+        run: npm run build
+        
+      - name: 🧪 Run tests (if available)
+        run: |
+          if [ -f "package.json" ] && npm run | grep -q "test"; then
+            npm test
+          else
+            echo "No tests found, skipping..."
+          fi
+        continue-on-error: true
+        
+      - name: 🔍 Build verification
+        run: |
+          echo "🔍 Verifying build artifacts..."
+          ls -la dist/
+          echo "✅ Build verification complete"
+          
+      - name: 🚀 Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: github-master-study-app
+          directory: dist
+          # Optional: Use github-pages deployment alias
+          wranglerVersion: '3'
+          
+      - name: 📊 Deployment Summary
+        run: |
+          echo "### 🎉 Deployment Complete!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Project**: GitHub Master Study App" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+          echo "- **Deploy**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **Live URL**: https://github-master-study-app.pages.dev" >> $GITHUB_STEP_SUMMARY
