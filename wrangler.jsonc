@@ -25,7 +25,7 @@
     {
       "binding": "DB",
       "database_name": "github-master-study-app-production",
-      "database_id": "TBD_AFTER_CLOUDFLARE_SETUP"
+      "database_id": "114fc01b-f394-48aa-9f45-9e316b25c98f"
     }
   ]
   // "ai": {

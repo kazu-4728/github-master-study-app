@@ -1,33 +1,4 @@
-import { Hono } from 'hono'
-import { cors } from 'hono/cors'
-import { serveStatic } from 'hono/cloudflare-workers'
-import type { Bindings } from './types'
-
-// Import API routes
-import { apiRoutes } from './routes/api'
-import { lessonRoutes } from './routes/lessons'
-import { quizRoutes } from './routes/quiz'
-import { practiceRoutes } from './routes/practice'
-import { progressRoutes } from './routes/progress'
-
-const app = new Hono<{ Bindings: Bindings }>()
-
-// Middleware
-app.use('/api/*', cors())
-
-// API Routes first (before static files)
-app.route('/api', apiRoutes)
-app.route('/api/lessons', lessonRoutes)
-app.route('/api/quiz', quizRoutes)
-app.route('/api/practice', practiceRoutes)
-app.route('/api/progress', progressRoutes)
-
-// Serve static files
-app.use('/static/*', serveStatic({ root: './public' }))
-
-// Main HTML route
-app.get('/', async (c) => {
-  return c.html(`<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -440,7 +411,4 @@ app.get('/', async (c) => {
     <script src="/static/js/data-manager.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
-</html>`)
-})
-
-export default app
+</html>
