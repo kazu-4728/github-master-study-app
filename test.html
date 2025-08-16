@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Master - Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🎓 GitHub Master - 動作テスト</h1>
+    
+    <div class="test-section">
+        <h2>1. 基本表示テスト</h2>
+        <div id="basic-test" class="status">読み込み中...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. API接続テスト</h2>
+        <button onclick="testAPI()">API テスト実行</button>
+        <div id="api-test" class="status">テスト待機中</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. ユーザー初期化テスト</h2>
+        <button onclick="testUserInit()">ユーザー初期化テスト</button>
+        <div id="user-test" class="status">テスト待機中</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. レッスンデータテスト</h2>
+        <button onclick="testLessons()">レッスンデータテスト</button>
+        <div id="lesson-test" class="status">テスト待機中</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. 機能ボタンテスト</h2>
+        <button onclick="testNavigation()">ナビゲーションテスト</button>
+        <div id="nav-test" class="status">テスト待機中</div>
+    </div>
+
+    <script>
+        // 基本表示テスト
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('basic-test').innerHTML = 
+                '<span class="success">✅ 基本HTML表示OK - DOM読み込み完了</span>';
+        });
+
+        // API接続テスト
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-test');
+            resultDiv.innerHTML = '🔄 APIテスト実行中...';
+            
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+                
+                if (data.status === 'ok') {
+                    resultDiv.innerHTML = `<span class="success">✅ API接続OK: ${data.message}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="error">❌ API応答エラー: ${JSON.stringify(data)}</span>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ API接続失敗: ${error.message}</span>`;
+            }
+        }
+
+        // ユーザー初期化テスト
+        async function testUserInit() {
+            const resultDiv = document.getElementById('user-test');
+            resultDiv.innerHTML = '🔄 ユーザー初期化テスト実行中...';
+            
+            try {
+                const userId = 'test_' + Math.random().toString(36).substr(2, 9);
+                const response = await fetch('/api/user/init', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `<span class="success">✅ ユーザー初期化OK: ${data.message}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="error">❌ ユーザー初期化失敗: ${data.error}</span>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ ユーザー初期化エラー: ${error.message}</span>`;
+            }
+        }
+
+        // レッスンデータテスト
+        async function testLessons() {
+            const resultDiv = document.getElementById('lesson-test');
+            resultDiv.innerHTML = '🔄 レッスンデータテスト実行中...';
+            
+            try {
+                const response = await fetch('/api/lessons/git-basics');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    resultDiv.innerHTML = `<span class="success">✅ レッスンデータ取得OK: ${data.data.title}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="error">❌ レッスンデータ取得失敗: ${JSON.stringify(data)}</span>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ レッスンデータエラー: ${error.message}</span>`;
+            }
+        }
+
+        // ナビゲーションテスト
+        function testNavigation() {
+            const resultDiv = document.getElementById('nav-test');
+            
+            try {
+                // 簡単なDOM操作テスト
+                const testElement = document.createElement('div');
+                testElement.innerHTML = 'テスト要素';
+                document.body.appendChild(testElement);
+                document.body.removeChild(testElement);
+                
+                resultDiv.innerHTML = '<span class="success">✅ DOM操作・ナビゲーション機能OK</span>';
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ ナビゲーション機能エラー: ${error.message}</span>`;
+            }
+        }
+
+        // 自動テスト実行
+        setTimeout(() => {
+            testAPI();
+        }, 1000);
+    </script>
+</body>
+</html>

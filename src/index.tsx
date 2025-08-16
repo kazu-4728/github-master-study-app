@@ -437,8 +437,7 @@ app.get('/', async (c) => {
     </footer>
 
     <!-- JavaScript -->
-    <script src="/static/js/data-manager.js"></script>
-    <script src="/static/js/app.js"></script>
+    <script src="/static/js/app-simple.js"></script>
 </body>
 </html>`)
 })
